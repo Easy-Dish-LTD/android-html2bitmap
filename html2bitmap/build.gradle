@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 33
@@ -23,13 +23,16 @@ dependencies {
 }
 
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: mavenLocal().getUrl())
-            pom.groupId = GROUP
-            pom.artifactId = POM_ARTIFACT_ID
-            pom.version = VERSION_NAME
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId GROUP
+            artifactId POM_ARTIFACT_ID
+            version VERSION_NAME
         }
+    }
+
+    repositories {
+        mavenLocal()
     }
 }
