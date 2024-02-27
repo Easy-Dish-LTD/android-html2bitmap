@@ -1,11 +1,12 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -18,12 +19,17 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.0.2'
-    testImplementation 'androidx.test.ext:junit:1.1.1-alpha01'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1-alpha01'
-    androidTestImplementation 'androidx.test:core:1.1.1-alpha01'
-    androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
+    implementation 'androidx.annotation:annotation:1.7.1'
 }
 
-apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: mavenLocal().getUrl())
+            pom.groupId = GROUP
+            pom.artifactId = POM_ARTIFACT_ID
+            pom.version = VERSION_NAME
+        }
+    }
+}

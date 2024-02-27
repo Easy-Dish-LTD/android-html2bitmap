@@ -85,7 +85,7 @@ class Html2BitmapWebView implements ProgressChangedListener {
 
                 // set the correct height of the webview and do measure and layout using it before taking the screenshot
                 int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(bitmapWidth, View.MeasureSpec.EXACTLY);
-                int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(webView.getContentHeight(), View.MeasureSpec.EXACTLY);
+                int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec((int) (webView.getContentHeight() * webView.getScale()), View.MeasureSpec.EXACTLY);
                 webView.measure(widthMeasureSpec, heightMeasureSpec);
                 webView.layout(0, 0, webView.getMeasuredWidth(), webView.getMeasuredHeight());
 
